@@ -4,4 +4,4 @@
 ---
 **注意！**  
 
-BaseDao包里的getConnection里将数据库名字，用户以及密码改为自己的数据库名称，用户以及密码
+dao.BaseDao.getConnection()里将数据库名字，用户以及密码改为自己的数据库名称，用户以及密码
