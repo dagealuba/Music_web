@@ -54,7 +54,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public boolean addUser(User user) {
-        return true;
+        return false;
     }
 
     @Override
