@@ -1,5 +1,6 @@
 package servlet;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import entity.User;
 import factory.ServiceFactory;
 
