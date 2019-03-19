@@ -14,7 +14,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
 
         String sql = "select * from user";
 
@@ -34,7 +34,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 users.add(user);
             }
         }catch (SQLException e){
-
+           e.printStackTrace();
         }finally {
             this.closeResource();
         }
@@ -43,8 +43,27 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
-    public User getUserById(String userId) {
-        return null;
+    public User getUserById(String userId){
+        User user = new User();
+
+        String sql = "select * from user where userid = ? ";
+
+        Object[] params = {userId};
+        resultSet = this.ExecuteQuery(sql,params);
+
+        try{
+            while(resultSet.next()){
+                user.setUserId(resultSet.getString("uderid"));
+                user.setUserName(resultSet.getString("udername"));
+                user.setUserPassword(resultSet.getString("usermail"));
+                user.setUserEmail(resultSet.getString("avatarsrc"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            this.closeResource();
+        }
+        return user;
     }
 
     @Override
