@@ -44,7 +44,22 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public User getUserById(String userId) {
-        return null;
+        String sql = "select * from user where userid=?";
+
+        Object[] params = {userId};
+        resultSet = this.ExecuteQuery(sql,params);
+
+        User user = null;
+        try {
+            while (resultSet.next()){
+                user = new User(userId,resultSet.getString("username"),resultSet.getString("userpassword"),resultSet.getString("useremail"),resultSet.getString("avatarsrc"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            this.closeResource();
+        }
+        return user;
     }
 
     @Override
@@ -64,6 +79,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        String sql = "update user set userid=?,username=?,userpassword=?,useremail=?,avatarsrc=? where userid="+user.getUserId();
+        Object[] params = {user.getUserId(),user.getUserName(),user.getUserPassword(),user.getUserEmail(),user.getAvatarSrc()};
+
+        return this.executeUpdate(sql,params)>0;
     }
 }

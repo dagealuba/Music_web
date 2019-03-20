@@ -9,4 +9,10 @@ public interface UserService {
      * @return User
      */
     public User findUserById(String userId);
+
+    /**
+     * @param url
+     * @return 修改是否成功
+     */
+    public Boolean updateUserAvatar(String url,String userId);
 }

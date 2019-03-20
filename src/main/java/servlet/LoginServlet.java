@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         User user = ServiceFactory.getUserService().findUserById(userId);
 
         if (user != null) {
-            if (user.getUserPassword() == userPassword){
+            if (user.getUserPassword().equals(userPassword)){
                 out.write("login_success");
             }
             else {
