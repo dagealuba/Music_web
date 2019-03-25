@@ -83,6 +83,7 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
         }finally {
             this.closeResource();
         }
+        return album;
     }
 
     @Override
@@ -104,7 +105,7 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
         }finally {
             this.closeResource();
         }
-
+        return album;
     }
 
     @Override
@@ -113,19 +114,37 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
         Object[] params = {album.getAlbumId(),album.getAlbumName(),album.getSinger()};
 
         int row = this.executeUpdate(sql,params);
-        if(row！=0)
-            return  true;
+        if(row!=0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAlbum(Album album) {
+
+        String sql = "delete from album where albumid = ?";
+        Object[] params ={album.getAlbumId()};
+
+        int row = this.executeUpdate(sql,params);
+        if(row!=0)
+            return true;
         else
             return false;
     }
 
     @Override
-    public boolean deleteAlbum(Album album) {
-        return false;
-    }
-
-    @Override
     public boolean updateAlbum(Album album) {
-        return false;
+
+        String sql = "update album set albumname = ?,singer = ? where albumid = ?";
+        Object[] params = {album.getAlbumName(),album.getSinger()};
+
+        int row = this.executeUpdate(sql,params);
+        if(row!=0)
+            return true;
+        else
+            return false;
     }
 }
