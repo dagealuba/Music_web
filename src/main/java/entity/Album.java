@@ -6,10 +6,10 @@ public class Album {
     private String singer;
 
 
-    Album(){
+    public Album(){
 
     }
-    Album(String id, String name, String singer){
+    public Album(String id, String name, String singer){
         this.singer = singer;
         albumId = id;
         albumName = name;
