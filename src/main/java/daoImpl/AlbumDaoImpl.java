@@ -26,7 +26,7 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
 
                 album.setAlbumId(resultSet.getString("albumid"));
                 album.setAlbumName(resultSet.getString("albumname"));
-                album.setAlbumName(resultSet.getString("singer"));
+                album.setSinger(resultSet.getString("singer"));
 
                 albums.add(album);
             }
