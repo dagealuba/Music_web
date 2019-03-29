@@ -40,27 +40,25 @@ public class UpdateUserAvatarServlet extends HttpServlet {
                 }
             }
 
-            for (FileItem item: files){
-                if (item.isFormField()){
+            for (FileItem item: files)
+                if (item.isFormField()) {
                     continue;
-                }
-                else {
+                } else {
                     String fileName = item.getName();
 
                     String type = item.getContentType();
 
                     if (type.equals("image/jpeg")) {
                         fileName = path + "avatar/" + userId + ".jpg";
-                    }
-                    else fileName = path + "avatar/" + userId + ".png";
+                    } else fileName = path + "avatar/" + userId + ".png";
                     InputStream in = item.getInputStream();
                     byte[] buffer = new byte[1024];
                     int len = 0;
 
                     OutputStream out = new FileOutputStream(fileName);
 
-                    while ((len = in.read(buffer)) != -1){
-                        out.write(buffer,0,len);
+                    while ((len = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, len);
                     }
 
                     out.close();
@@ -68,13 +66,11 @@ public class UpdateUserAvatarServlet extends HttpServlet {
 
                     if (type.equals("image/jpeg")) {
                         fileName = host + "avatar/" + userId + ".jpg";
-                    }
-                    else fileName = host + "avatar/" + userId + ".png";
-                    if ( ServiceFactory.getUserService().updateUserAvatar(fileName,userId) ) {
+                    } else fileName = host + "avatar/" + userId + ".png";
+                    if (ServiceFactory.getUserService().updateUserAvatar(fileName, userId)) {
                         flag = "true";
                     }
                 }
-            }
 
             outWrite.write(flag);
             outWrite.flush();
