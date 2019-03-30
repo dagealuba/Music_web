@@ -11,6 +11,10 @@ public class Album {
         albumName = name;
     }
 
+    public Album(){
+
+    }
+
     public String getAlbumId() {
         return albumId;
     }
