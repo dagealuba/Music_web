@@ -67,4 +67,15 @@ public class User {
     public void setAvatarSrc(String avatarSrc) {
         this.avatarSrc = avatarSrc;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", avatarSrc='" + avatarSrc + '\'' +
+                '}';
+    }
 }

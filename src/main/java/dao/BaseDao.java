@@ -14,8 +14,9 @@ public class BaseDao {
     public boolean getConnection() {
         String driver = "com.mysql.cj.jdbc.Driver";
         String user = "root";
-        String password = "199883";
-        String url = "jdbc:mysql://localhost:3306/music?useSSL=false&useUnicode=true&characterEncoding=UTF-8";
+        String password = "123456";
+        //String url = "jdbc:mysql://localhost:3306/music?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/music?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
 
         try {
             Class.forName(driver);
