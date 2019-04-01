@@ -40,7 +40,7 @@ public class UpdateUserAvatarServlet extends HttpServlet {
                 }
             }
 
-            for (FileItem item: files)
+            for (FileItem item: files) {
                 if (item.isFormField()) {
                     continue;
                 } else {
@@ -67,10 +67,12 @@ public class UpdateUserAvatarServlet extends HttpServlet {
                     if (type.equals("image/jpeg")) {
                         fileName = host + "avatar/" + userId + ".jpg";
                     } else fileName = host + "avatar/" + userId + ".png";
+
                     if (ServiceFactory.getUserService().updateUserAvatar(fileName, userId)) {
                         flag = "true";
                     }
                 }
+            }
 
             outWrite.write(flag);
             outWrite.flush();

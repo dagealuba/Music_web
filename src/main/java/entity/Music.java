@@ -9,7 +9,7 @@ public class Music {
     private String musicSrc;
     private String picSrc;
 
-    Music(String id,String name,String singer,String albumid,String lyricsrc,String musicsrc,String picsrc){
+    public Music(String id, String name, String singer, String albumid, String lyricsrc, String musicsrc, String picsrc){
         musicId = id;
         musicName = name;
         this.signer = singer;
@@ -17,6 +17,10 @@ public class Music {
         lyricSrc = lyricsrc;
         musicSrc = musicsrc;
         picSrc = picsrc;
+    }
+
+    public Music() {
+
     }
 
     /**

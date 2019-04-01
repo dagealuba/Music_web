@@ -29,6 +29,8 @@ public class FindUserServlet extends HttpServlet {
 
         String user_json = JSON.toJSONString(user);
 
+        System.out.println(response.getHeader("Content-Length"));
+
         out.write(user_json);
         out.flush();
         out.close();

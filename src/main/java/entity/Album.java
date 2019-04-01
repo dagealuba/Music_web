@@ -5,7 +5,7 @@ public class Album {
     private String albumName;
     private String singer;
 
-    Album(String id,String name,String singer){
+    public Album(String id, String name, String singer){
         this.singer = singer;
         albumId = id;
         albumName = name;

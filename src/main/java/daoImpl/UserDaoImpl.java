@@ -22,17 +22,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         resultSet = this.ExecuteQuery(sql,params);
 
         try {
-            while(resultSet.next()){
-                User user = new User();
-
-                user.setUserId(resultSet.getString("userid"));
-                user.setUserName(resultSet.getString("username"));
-                user.setUserPassword(resultSet.getString("userpassword"));
-                user.setUserEmail(resultSet.getString("useremail"));
-                user.setAvatarSrc(resultSet.getString("avatarsrc"));
-
-                users.add(user);
-            }
+            getUsers(users);
         }catch (SQLException e){
 
         }finally {
@@ -70,15 +60,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         Object[] params={userName};
         resultSet=this.ExecuteQuery(sql,params);
         try{
-            while(resultSet.next()){
-                User user=new User();
-                user.setUserId(resultSet.getString("userid"));
-                user.setUserName(resultSet.getString("username"));
-                user.setUserPassword(resultSet.getString("userpassword"));
-                user.setUserEmail(resultSet.getString("useremail"));
-                user.setAvatarSrc(resultSet.getString("avatarsrc"));
-                users.add(user);
-            }
+            getUsers(users);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -87,9 +69,27 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return users;
     }
 
+    //查找用户的重复代码
+    private void getUsers(List<User> users) throws SQLException {
+        while(resultSet.next()){
+            User user=new User();
+            user.setUserId(resultSet.getString("userid"));
+            user.setUserName(resultSet.getString("username"));
+            user.setUserPassword(resultSet.getString("userpassword"));
+            user.setUserEmail(resultSet.getString("useremail"));
+            user.setAvatarSrc(resultSet.getString("avatarsrc"));
+            users.add(user);
+        }
+    }
+
     @Override
     public boolean addUser(User user) {
         String sql = "insert into user values(?,?,?,?,?)";
+        return addOrUpdataUser(user, sql);
+    }
+
+    //添加修改用户的重复代码
+    private boolean addOrUpdataUser(User user, String sql) {
         String userId=user.getUserId();
         String userName=user.getUserName();
         String userPassword=user.getUserPassword();
@@ -110,13 +110,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public boolean updateUser(User user) {
-        String sql = "update user set userName = ?,userPassword = ?,userEmail = ?,avatarSrc=? where userId = ?";
+        String sql = "update user set username = ?,userpassword = ?,useremail = ?,avatarsrc=? where userid = ?";
+
         String userId=user.getUserId();
         String userName=user.getUserName();
         String userPassword=user.getUserPassword();
         String userEmail=user.getUserEmail();
-        String avatarSrc=user.getAvatarSrc();
-        Object[] params={userId,userName,userPassword,userEmail,avatarSrc};
+        String AvatarSrc=user.getAvatarSrc();
+        Object[] params={userName,userPassword,userEmail,AvatarSrc,userId};
+
+
         return this.executeUpdate(sql,params)>0;
     }
 }
