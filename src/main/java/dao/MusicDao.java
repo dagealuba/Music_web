@@ -11,7 +11,9 @@ public interface MusicDao {
 
     public List<Music> getMusicByName(String musicname);
 
-    public List<Music> getMusicBysinger(String singer);
+    public List<Music> getMusicBySinger(String singer);
+
+    public Music getMusicByNameAndSinger(String musicname,String singer);
 
     public boolean addMusic(Music music);
 
