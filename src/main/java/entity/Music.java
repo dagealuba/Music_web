@@ -27,6 +27,11 @@ public class Music {
      *  还有需要的构造函数自己加
      */
 
+    public Music()
+    {
+
+    }
+
     public String getMusicId() {
         return musicId;
     }
@@ -59,9 +64,11 @@ public class Music {
         this.lyricSrc = lyricSrc;
     }
 
-    public String getMusicSrc() {
-        return musicSrc;
+    public String getMusicSrc(String musicSrc) {
+        return this.musicSrc;
     }
+
+    public String getMusicSrc() {return musicSrc;}
 
     public void setMusicSrc(String musicSrc) {
         this.musicSrc = musicSrc;
