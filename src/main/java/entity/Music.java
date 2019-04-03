@@ -19,10 +19,6 @@ public class Music {
         picSrc = picsrc;
     }
 
-    public Music() {
-
-    }
-
     /**
      *  还有需要的构造函数自己加
      */
