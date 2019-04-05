@@ -86,10 +86,10 @@ public class MusicDaoImpl extends BaseDao implements MusicDao {
      * @param: [musicname]
      * @return: java.util.List<entity.Music>
      */
-    public List<Music> getMusicByName(String musicname) {
+    public List<Music> getMusicsBySongName(String musicname) {
         List<Music> musics  = new ArrayList<Music>();
-        String sql = "select * from music where musicname = ?";
-        Object[] params = {musicname};
+        String sql = "select * from music where musicname like ?";
+        Object[] params = {musicname+"%"};
 
         resultSet = this.ExecuteQuery(sql,params);
 
@@ -227,7 +227,7 @@ public class MusicDaoImpl extends BaseDao implements MusicDao {
      * @return: boolean
      */
     public boolean updateMusic(Music music) {
-        String sql = "update music musicname = ?,singer = ?,albumid = ?,lyrisrc = ?,musicsrc = ?,picsrc = ? where musicid = ?";
+        String sql = "update music set musicname = ?,singer = ?,albumid = ?,lyrisrc = ?,musicsrc = ?,picsrc = ? where musicid = ?";
         Object[] params = {music.getMusicName(),music.getSigner(),music.getAlbumId(),music.getLyricSrc(),music.getMusicSrc(),music.getPicSrc(),music.getMusicId()};
 
         int row = this.executeUpdate(sql,params);
