@@ -9,7 +9,7 @@ public interface MusicDao {
 
     public Music getMusicById(String musicid);
 
-    public List<Music> getMusicByName(String musicname);
+    public List<Music> getMusicsBySongName(String musicname);
 
     public List<Music> getMusicBySinger(String singer);
 
