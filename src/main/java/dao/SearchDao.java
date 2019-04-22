@@ -2,6 +2,7 @@ package dao;
 
 
 import entity.Album;
+import entity.Music;
 
 import java.util.List;
 
@@ -10,13 +11,13 @@ public interface SearchDao {
      * 搜索歌曲演唱者
      * @return String musicSrc
      */
-    public String SearchSinger(String singer);
+    public List<Music> SearchSinger(String signer);
 
     /**
      * 搜索歌曲名字
      * @return String musicSrc
      */
-    public String SearchMusicName(String musicName);
+    public List<Music> SearchMusicName(String musicName);
 
     /**
      * 搜索音乐专辑
@@ -24,6 +25,8 @@ public interface SearchDao {
      */
 
     public List<Album> SearchAlbum(String albumName);
+
+
 
 
 }
