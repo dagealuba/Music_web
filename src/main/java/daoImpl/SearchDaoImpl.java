@@ -9,24 +9,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SearchDaoImpl extends BaseDao implements SearchDao {
 
     private ResultSet resultSet=null;
 
     @Override
-    public String SearchSinger(String singer) {
-
+    public List<Music> SearchSinger(String signer) {
+        List<Music> musics=new ArrayList<>();
         String sql="select * from Music where signer like ?";
-        Object params[]={singer};
-
+        Object params[]={signer};
         resultSet=this.ExecuteQuery(sql,params);
         Music music=new Music();
         try{
             while(resultSet.next()){
-                music.setSigner(singer);
-                music.getMusicSrc(resultSet.getString("musicSrc"));
+                music.setMusicId(resultSet.getString("musicId"));
+                music.setMusicName(resultSet.getString("musicName"));
+                music.setSigner(resultSet.getString("signer"));
+                music.setAlbumId(resultSet.getString("albumId"));
+                music.setLyricSrc(resultSet.getString("lyricSrc"));
+                music.setMusicSrc(resultSet.getString("musicSrc"));
+                music.setPicSrc(resultSet.getString("picSrc"));
+                musics.add(music);
             }
 
         } catch (SQLException e) {
@@ -35,29 +39,35 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
             this.closeResource();
         }
 
-        return music.getMusicSrc();
+        return musics;
 
         //return BaseDao.ExecuteQuery(sql,params);
     }
 
     @Override
-    public String SearchMusicName(String musicName) {
-
+    public List<Music> SearchMusicName(String musicName) {
+        List<Music> musics=new ArrayList<>();
         String sql="select * from Music where musicName like ?";
         Object params[]={musicName};
         resultSet=this.ExecuteQuery(sql,params);
         Music music =new Music();
         try{
             while(resultSet.next()){
-                music.setMusicName(musicName);
-                music.getMusicSrc(resultSet.getString("musicSrc"));
+                music.setMusicId(resultSet.getString("musicId"));
+                music.setMusicName(resultSet.getString("musicName"));
+                music.setSigner(resultSet.getString("signer"));
+                music.setAlbumId(resultSet.getString("albumId"));
+                music.setLyricSrc(resultSet.getString("lyricSrc"));
+                music.setMusicSrc(resultSet.getString("musicSrc"));
+                music.setPicSrc(resultSet.getString("picSrc"));
+                musics.add(music);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             this.closeResource();
         }
-        return music.getMusicSrc();
+        return musics;
     }
 
     @Override
@@ -83,4 +93,7 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         }
         return albums;
     }
+
+
+
 }

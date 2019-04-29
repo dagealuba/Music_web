@@ -1,6 +1,7 @@
 package serviceImpl;
 
 import entity.Album;
+import entity.Music;
 import factory.DaoFactory;
 import service.SearchService;
 
@@ -9,12 +10,12 @@ import java.util.List;
 public class SearchServiceImpl implements SearchService {
 
     @Override
-    public String FindSinger(String singer) {
-        return DaoFactory.getSearchDaoImpl().SearchSinger(singer );
+    public List<Music> FindSinger(String signer) {
+        return DaoFactory.getSearchDaoImpl().SearchSinger(signer );
     }
 
     @Override
-    public String FindMusicName(String musicName) {
+    public List<Music> FindMusicName(String musicName) {
         return DaoFactory.getSearchDaoImpl().SearchMusicName(musicName);
     }
 
@@ -22,4 +23,6 @@ public class SearchServiceImpl implements SearchService {
     public List<Album> FindAlbumName(String albumName) {
         return DaoFactory.getSearchDaoImpl().SearchAlbum(albumName);
     }
+
+
 }

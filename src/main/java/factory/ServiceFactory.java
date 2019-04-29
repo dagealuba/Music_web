@@ -1,7 +1,9 @@
 package factory;
 
+import service.SearchService;
 import serviceImpl.AlbumServiceImpl;
 import serviceImpl.MusicServiceImpl;
+import serviceImpl.SearchServiceImpl;
 import serviceImpl.UserServiceImpl;
 
 public class ServiceFactory {
@@ -15,5 +17,9 @@ public class ServiceFactory {
 
     public static AlbumServiceImpl getAlbumService() {
         return new AlbumServiceImpl();
+    }
+
+    public static SearchService getSearchServiceImpl() {
+        return new SearchServiceImpl();
     }
 }
