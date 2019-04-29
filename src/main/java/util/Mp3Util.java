@@ -35,6 +35,10 @@ public class Mp3Util {
         try {
             MP3File mp3File = (MP3File) AudioFileIO.read(mp3);
 
+            if ( mp3File.getID3v2Tag().frameMap.get("TPE1") == null ){
+                return null;
+            }
+
             String singer = mp3File.getID3v2Tag().frameMap.get("TPE1").toString();
             return getString(singer);
         } catch (IOException e) {
@@ -55,6 +59,10 @@ public class Mp3Util {
     public static String getSongName(File mp3){
         try {
             MP3File mp3File = (MP3File) AudioFileIO.read(mp3);
+
+            if ( mp3File.getID3v2Tag().frameMap.get("TIT2") == null ){
+                return null;
+            }
 
             String songName = mp3File.getID3v2Tag().frameMap.get("TIT2").toString();
             return getString(songName);
@@ -78,6 +86,10 @@ public class Mp3Util {
         try {
             MP3File mp3File = (MP3File) AudioFileIO.read(mp3);
 
+            if ( mp3File.getID3v2Tag().frameMap.get("TALB") == null ){
+                return null;
+            }
+
             String album = mp3File.getID3v2Tag().frameMap.get("TALB").toString();
 
             return getString(album);
@@ -92,6 +104,33 @@ public class Mp3Util {
         } catch (InvalidAudioFrameException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public static String getType(File mp3){
+        try{
+            MP3File mp3File = (MP3File) AudioFileIO.read(mp3);
+
+            if ( mp3File.getID3v2Tag().frameMap.get("TCON") == null ){
+                return null;
+            }
+
+            String type = mp3File.getID3v2Tag().frameMap.get("TCON").toString();
+
+            return getString(type);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (CannotReadException e) {
+            e.printStackTrace();
+        } catch (ReadOnlyFileException e) {
+            e.printStackTrace();
+        } catch (TagException e) {
+            e.printStackTrace();
+        } catch (InvalidAudioFrameException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
