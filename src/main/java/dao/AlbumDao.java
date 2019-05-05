@@ -18,6 +18,8 @@ public interface AlbumDao {
      */
     public List<Album> getAlbumsBySinger(String singer);
 
+    public Album getAlbumById(String albumId);
+
     /**
      * @param album
      * @return

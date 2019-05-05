@@ -47,7 +47,8 @@ public class UploadMusicServlet extends HttpServlet {
                 }
 
                 //存音乐到服务器
-                String fileName = path+"music/"+item.getName();
+                String musicId = UUID.randomUUID().toString();
+                String fileName = path+"music/"+musicId+".mp3";
 
                 InputStream in = item.getInputStream();
 
@@ -98,18 +99,18 @@ public class UploadMusicServlet extends HttpServlet {
 
                 //获取封面图片
                 String picSrc = "";
-                String type = Mp3Util.uploadPic(file,path+"pic/"+item.getName()+".jpg",true);
+                String type = Mp3Util.uploadPic(file,path+"pic/"+musicId+".jpg",true);
                 if ( null != type ){
                     if ( !type.equals("other") ){
-                        picSrc = host + "pic/" + item.getName() + "." + type;
+                        picSrc = host + "pic/" + musicId + "." + type;
                     }
                 }
+
                 //歌曲地址
-                String musicSrc = host + "music/" + item.getName();
-                String musicId = UUID.randomUUID().toString();
+                String musicSrc = host + "music/" + musicId;
 
                 music.setMusicId(musicId);
-                music.setSigner(singer);
+                music.setSinger(singer);
                 music.setMusicName(songName);
                 music.setPicSrc(picSrc);
                 music.setMusicSrc(musicSrc);

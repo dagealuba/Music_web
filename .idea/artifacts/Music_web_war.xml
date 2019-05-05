@@ -13,6 +13,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.2.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.2.6.RELEASE" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/jaudiotagger-2.2.6-SNAPSHOT.jar" />
         </element>
       </element>
     </root>

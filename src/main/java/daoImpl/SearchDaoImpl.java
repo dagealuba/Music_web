@@ -4,6 +4,7 @@ import dao.BaseDao;
 import dao.SearchDao;
 import entity.Album;
 import entity.Music;
+import entity.Music_a;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,21 +16,21 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
     private ResultSet resultSet=null;
 
     @Override
-    public List<Music> SearchSinger(String signer) {
+    public List<Music> SearchSinger(String singer) {
         List<Music> musics=new ArrayList<>();
-        String sql="select * from Music where signer like ?";
-        Object params[]={signer};
+        String sql="select * from music where singer like ?";
+        Object params[]={"%"+singer+"%"};
         resultSet=this.ExecuteQuery(sql,params);
         Music music=new Music();
         try{
             while(resultSet.next()){
-                music.setMusicId(resultSet.getString("musicId"));
-                music.setMusicName(resultSet.getString("musicName"));
-                music.setSigner(resultSet.getString("signer"));
-                music.setAlbumId(resultSet.getString("albumId"));
-                music.setLyricSrc(resultSet.getString("lyricSrc"));
-                music.setMusicSrc(resultSet.getString("musicSrc"));
-                music.setPicSrc(resultSet.getString("picSrc"));
+                music.setMusicId(resultSet.getString("musicid"));
+                music.setMusicName(resultSet.getString("musicname"));
+                music.setSinger(resultSet.getString("singer"));
+                music.setAlbumId(resultSet.getString("albumid"));
+                music.setLyricSrc(resultSet.getString("lyricsrc"));
+                music.setMusicSrc(resultSet.getString("musicsrc"));
+                music.setPicSrc(resultSet.getString("picsrc"));
                 musics.add(music);
             }
 
@@ -40,26 +41,24 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         }
 
         return musics;
-
-        //return BaseDao.ExecuteQuery(sql,params);
     }
 
     @Override
     public List<Music> SearchMusicName(String musicName) {
         List<Music> musics=new ArrayList<>();
-        String sql="select * from Music where musicName like ?";
-        Object params[]={musicName};
+        String sql="select * from music where musicname like ?";
+        Object params[]={"%"+musicName+"%"};
         resultSet=this.ExecuteQuery(sql,params);
         Music music =new Music();
         try{
             while(resultSet.next()){
-                music.setMusicId(resultSet.getString("musicId"));
-                music.setMusicName(resultSet.getString("musicName"));
-                music.setSigner(resultSet.getString("signer"));
-                music.setAlbumId(resultSet.getString("albumId"));
-                music.setLyricSrc(resultSet.getString("lyricSrc"));
-                music.setMusicSrc(resultSet.getString("musicSrc"));
-                music.setPicSrc(resultSet.getString("picSrc"));
+                music.setMusicId(resultSet.getString("musicid"));
+                music.setMusicName(resultSet.getString("musicname"));
+                music.setSinger(resultSet.getString("singer"));
+                music.setAlbumId(resultSet.getString("albumid"));
+                music.setLyricSrc(resultSet.getString("lyricsrc"));
+                music.setMusicSrc(resultSet.getString("musicsrc"));
+                music.setPicSrc(resultSet.getString("picsrc"));
                 musics.add(music);
             }
         } catch (SQLException e) {
@@ -73,15 +72,15 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
     @Override
     public List<Album> SearchAlbum(String albumName) {
         List<Album> albums=new ArrayList<>();
-        String sql="select * from Album where albumName like ?";
-        Object[] params={albumName};
+        String sql="select * from album where albumname like ?";
+        Object[] params={"%"+albumName+"%"};
         resultSet=this.ExecuteQuery(sql,params);
 
         try{
             while(resultSet.next()){
                 Album album=new Album();
                 album.setAlbumName(albumName);
-                album.setAlbumId(resultSet.getString("albumId"));
+                album.setAlbumId(resultSet.getString("albumid"));
                 album.setSinger(resultSet.getString("singer"));
                 albums.add(album);
             }
