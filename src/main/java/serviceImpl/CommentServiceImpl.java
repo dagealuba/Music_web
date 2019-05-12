@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean InserComment(Comment comments) {
+    public boolean newComment(Comment comments) {
         return DaoFactory.getCommentDaoImpl().InsertComment(comments);
     }
 
