@@ -1,5 +1,6 @@
 package factory;
 
+import serviceImpl.CommentServiceImpl;
 import serviceImpl.SearchServiceImpl;
 import serviceImpl.UserServiceImpl;
 
@@ -9,5 +10,7 @@ public class ServiceFactory {
     }
 
     public static SearchServiceImpl getSearchServiceImpl(){return new SearchServiceImpl();}
+
+    public static CommentServiceImpl getCommentServiceImpl(){return new CommentServiceImpl();}
 
 }
