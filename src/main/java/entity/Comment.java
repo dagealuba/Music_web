@@ -19,6 +19,11 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
+    public Comment()
+    {
+
+    }
+
     public String getCommentId() {
         return commentId;
     }
