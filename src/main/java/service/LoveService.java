@@ -10,5 +10,5 @@ public interface LoveService {
 
     public boolean addlove(Love love);
 
-    public boolean checkLoveName(Love love);
+
 }
