@@ -4,10 +4,42 @@ import entity.User;
 import factory.DaoFactory;
 import service.UserService;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(String userId) {
         return DaoFactory.getUserDaoImpl().getUserById(userId);
+    }
+
+    @Override
+    public List<User> findUserById(List<String> userIds) {
+        return null;
+    }
+
+    @Override
+    public List<User> findUserByName(String userName) {
+        return null;
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return null;
+    }
+
+    @Override
+    public boolean insert(List<User> users) {
+        return false;
+    }
+
+    @Override
+    public boolean update(List<User> users) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(List<User> users) {
+        return false;
     }
 
     @Override

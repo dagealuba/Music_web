@@ -190,9 +190,7 @@ public class Mp3Util {
             if (type.equals("png")){
                 File file = new File(path);
                 String name = file.getAbsolutePath();
-//                System.out.println(name);
                 name = name.substring(0,name.lastIndexOf("."))+".png";
-//                System.out.println(name);
                 file.renameTo(new File(name));
             }
 

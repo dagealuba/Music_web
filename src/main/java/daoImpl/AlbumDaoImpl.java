@@ -28,6 +28,30 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
         return getAlbums(singer, albums, sql);
     }
 
+    @Override
+    public Album getAlbumById(String albumId) {
+        Album album = null;
+
+        String sql = "select * from album where albumId = ?";
+
+        Object[] params = {albumId};
+
+        resultSet = this.ExecuteQuery(sql, params);
+
+        try{
+            while(resultSet.next()){
+                String albumName = resultSet.getString("albumName");
+                String singer = resultSet.getString("singer");
+
+                album = new Album(albumId,albumName,singer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return album;
+    }
+
 
     /**
      * @param str 专辑名或歌手

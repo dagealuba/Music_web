@@ -2,7 +2,7 @@ package service;
 
 
 import entity.Album;
-import entity.Music;
+import entity.Music_a;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ public interface SearchService {
      * @param singer
      * @return String MusicSrc
      */
-    public List<Music> FindSinger(String signer);
+    public List<Music_a> FindSinger(String singer);
 
     /**
      * 根据歌曲的歌曲名查询歌曲，返回的是歌曲在服务器上的地址
      * @param musicName
      * @return String musicSrc
      */
-    public List<Music> FindMusicName(String musicName);
+    public List<Music_a> FindMusicName(String musicName);
 
     /**
      * 根据专辑名查询专辑，返回的是一个专辑列表

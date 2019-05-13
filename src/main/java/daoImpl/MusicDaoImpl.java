@@ -50,7 +50,7 @@ public class MusicDaoImpl extends BaseDao implements MusicDao {
     @Override
     public boolean addMusic(Music music) {
         String sql = "insert into music values(?,?,?,?,?,?,?)";
-        Object[] params = {music.getMusicId(),music.getMusicName(),music.getSigner(),music.getAlbumId(),music.getLyricSrc(),music.getMusicSrc(),music.getPicSrc()};
+        Object[] params = {music.getMusicId(),music.getMusicName(),music.getSinger(),music.getAlbumId(),music.getLyricSrc(),music.getMusicSrc(),music.getPicSrc()};
 
         return this.executeUpdate(sql,params) > 0;
     }

@@ -1,30 +1,28 @@
 package entity;
 
-public class Music {
+import factory.DaoFactory;
+
+public class Music_a {
     private String musicId;
     private String musicName;
     private String singer;
-    private String albumId;
+    private String album;
     private String lyricSrc;
     private String musicSrc;
     private String picSrc;
 
-    public Music(String id, String name, String singer, String albumid, String lyricsrc, String musicsrc, String picsrc){
-        musicId = id;
-        musicName = name;
-        this.singer = singer;
-        albumId = albumid;
-        lyricSrc = lyricsrc;
-        musicSrc = musicsrc;
-        picSrc = picsrc;
-    }
+    public Music_a(Music music){
+        musicId = music.getMusicId();
+        musicName = music.getMusicName();
+        singer = music.getSinger();
+        lyricSrc = music.getLyricSrc();
+        musicSrc = music.getMusicSrc();
+        picSrc = music.getPicSrc();
 
-    /**
-     *  还有需要的构造函数自己加
-     */
-
-    public Music() {
-
+        if (DaoFactory.getAlbumDaoImpl().getAlbumById(music.getAlbumId())!= null){
+            album = DaoFactory.getAlbumDaoImpl().getAlbumById(music.getAlbumId()).getAlbumName();
+        }
+        else album = null;
     }
 
     public String getMusicId() {
@@ -51,6 +49,14 @@ public class Music {
         this.singer = singer;
     }
 
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
     public String getLyricSrc() {
         return lyricSrc;
     }
@@ -59,11 +65,9 @@ public class Music {
         this.lyricSrc = lyricSrc;
     }
 
-    public String getMusicSrc(String musicSrc) {
-        return this.musicSrc;
+    public String getMusicSrc() {
+        return musicSrc;
     }
-
-    public String getMusicSrc() {return musicSrc;}
 
     public void setMusicSrc(String musicSrc) {
         this.musicSrc = musicSrc;
@@ -75,13 +79,5 @@ public class Music {
 
     public void setPicSrc(String picSrc) {
         this.picSrc = picSrc;
-    }
-
-    public String getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(String albumId) {
-        this.albumId = albumId;
     }
 }
