@@ -21,9 +21,10 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         String sql="select * from music where singer like ?";
         Object params[]={"%"+singer+"%"};
         resultSet=this.ExecuteQuery(sql,params);
-        Music music=new Music();
+
         try{
             while(resultSet.next()){
+                Music music=new Music();
                 music.setMusicId(resultSet.getString("musicid"));
                 music.setMusicName(resultSet.getString("musicname"));
                 music.setSinger(resultSet.getString("singer"));
@@ -49,9 +50,9 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         String sql="select * from music where musicname like ?";
         Object params[]={"%"+musicName+"%"};
         resultSet=this.ExecuteQuery(sql,params);
-        Music music =new Music();
         try{
             while(resultSet.next()){
+                Music music =new Music();
                 music.setMusicId(resultSet.getString("musicid"));
                 music.setMusicName(resultSet.getString("musicname"));
                 music.setSinger(resultSet.getString("singer"));
@@ -93,6 +94,25 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         return albums;
     }
 
+    @Override
+    public Music SearchMusicId(String musicId) {
+        Music music = null;
+        String sql = "select * from music where musicId = ?";
+
+        Object[] params = {musicId};
+
+        resultSet = this.ExecuteQuery(sql,params);
+
+        try {
+            while (resultSet.next()){
+                music = new Music(musicId,resultSet.getString("musicname"),resultSet.getString("singer"),resultSet.getString("albumid"), resultSet.getString("lyricsrc"), resultSet.getString("musicsrc"),resultSet.getString("picsrc"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return music;
+    }
 
 
 }

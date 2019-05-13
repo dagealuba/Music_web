@@ -3,6 +3,7 @@ package dao;
 
 import entity.Album;
 import entity.Music;
+import entity.Music_a;
 
 import java.util.List;
 
@@ -27,6 +28,10 @@ public interface SearchDao {
     public List<Album> SearchAlbum(String albumName);
 
 
-
+    /**
+     * @param musicId
+     * @return music
+     */
+    public Music SearchMusicId(String musicId);
 
 }

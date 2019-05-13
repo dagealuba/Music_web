@@ -29,6 +29,7 @@ public class SearchServiceImpl implements SearchService {
         List<Music_a> music_as = new ArrayList<Music_a>();
 
         for (Music music: musicList){
+            System.out.println(music.getMusicName());
             music_as.add(new Music_a(music));
         }
 
@@ -38,6 +39,15 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Album> FindAlbumName(String albumName) {
         return DaoFactory.getSearchDaoImpl().SearchAlbum(albumName);
+    }
+
+    @Override
+    public Music_a FindMusicById(String musicId) {
+        Music music = DaoFactory.getSearchDaoImpl().SearchMusicId(musicId);
+        if (music != null){
+            return new Music_a(music);
+        }
+        return null;
     }
 
 

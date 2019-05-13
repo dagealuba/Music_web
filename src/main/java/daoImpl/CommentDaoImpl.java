@@ -27,11 +27,11 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
             while (resultSet.next())
             {
                 comment.setComment(resultSet.getString("comment"));
-                comment.setCommentId(resultSet.getString("commentId"));
-                comment.setCommentTime(resultSet.getTimestamp("commentTime"));
-                comment.setLikeNumber(resultSet.getInt("likeNumber"));
-                comment.setMusicId(resultSet.getString("musicId"));
-                comment.setCommentToComment(resultSet.getString("commentToComment"));
+                comment.setCommentId(resultSet.getString("commentid"));
+                comment.setCommentTime(resultSet.getTimestamp("commenttime"));
+                comment.setLikeNumber(resultSet.getInt("likenumber"));
+                comment.setMusicId(resultSet.getString("musicid"));
+                comment.setCommentToComment(resultSet.getString("commenttocomment"));
                 comments.add(comment);
             }
         } catch (SQLException e) {
@@ -54,10 +54,10 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
             {
                 comment.setMusicId(musicId);
                 comment.setComment(resultSet.getString("comment"));
-                comment.setCommentId(resultSet.getString("commentId"));
-                comment.setCommentToComment(resultSet.getString("commentToComment"));
-                comment.setLikeNumber(resultSet.getInt("likeNumber"));
-                comment.setCommentTime(resultSet.getTimestamp("commentTime"));
+                comment.setCommentId(resultSet.getString("commentid"));
+                comment.setCommentToComment(resultSet.getString("commenttocomment"));
+                comment.setLikeNumber(resultSet.getInt("likenumber"));
+                comment.setCommentTime(resultSet.getTimestamp("commenttime"));
                 comments.add(comment);
             }
 
@@ -72,7 +72,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
 
     @Override
     public Comment CommentByCommentId(String commentId) {
-        String sql="select * from comment where commentId=?";
+        String sql="select * from comment where commentid=?";
         Object[] params={commentId};
 
         resultSet=this.ExecuteQuery(sql,params);
@@ -81,10 +81,10 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
             while(resultSet.next()) {
                 comment.setCommentId(commentId);
                 comment.setComment(resultSet.getString("comment"));
-                comment.setMusicId(resultSet.getString("musicId"));
-                comment.setCommentToComment(resultSet.getString("commentToComment"));
-                comment.setCommentTime(resultSet.getTimestamp("commentTime"));
-                comment.setLikeNumber(resultSet.getInt("likeNumber"));
+                comment.setMusicId(resultSet.getString("musicid"));
+                comment.setCommentToComment(resultSet.getString("commenttocomment"));
+                comment.setCommentTime(resultSet.getTimestamp("commenttime"));
+                comment.setLikeNumber(resultSet.getInt("likenumber"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
 
     @Override
     public boolean DeleteCommentByCommentId(String commentId) {
-        String sql="delete * from comment where commentId=?";
+        String sql="delete * from comment where commentid=?";
         Object[] params={commentId};
         return this.executeUpdate(sql,params) > 0;
 
@@ -113,7 +113,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
 
     @Override
     public boolean InsertComment(Comment comments) {
-        String sql="insert into comment(commentId,musicId,comment) values(?,?,?)";
+        String sql="insert into comment(commentid,musicid,comment) values(?,?,?)";
         String commentId=comments.getCommentId();
         String musicId=comments.getMusicId();
         String comment=comments.getComment();
@@ -124,7 +124,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
 
     @Override
     public boolean updateComment(Comment comments) {
-        String sql = "update comment set comment = ?,time = now() where commentId = ?";
+        String sql = "update comment set comment = ?,time = now() where commentid = ?";
         String commentId=comments.getCommentId();
         String comment=comments.getComment();
 

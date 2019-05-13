@@ -43,29 +43,15 @@ public class SearchByMusicNameServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
         String musicName=request.getParameter("musicName");
-        String musicId=request.getParameter("musicId");
-        String singer=request.getParameter("singer");
-        String albumId=request.getParameter("albumId");
-        String lyricSrc=request.getParameter("lyricSrc");
-        String musicSrc=request.getParameter("musicSrc");
-        String picSrc=request.getParameter("picSrc");
 
         Music music =new Music();
-        music.setMusicId(musicId);
         music.setMusicName(musicName);
-        music.setSinger(singer);
-        music.setAlbumId(albumId);
-        music.setLyricSrc(lyricSrc);
-        music.setMusicSrc(musicSrc);
-        music.setPicSrc(picSrc);
         List<Music_a> musics=new ArrayList<Music_a>();
 
         musics= ServiceFactory.getSearchServiceImpl().FindMusicName(musicName);
-        System.out.println(musics.size());
         PrintWriter out=response.getWriter();
 
         String jsonArray= JSONArray.toJSONString(musics);
-        System.out.println(jsonArray);
         out.write(jsonArray);
         out.flush();
         out.close();

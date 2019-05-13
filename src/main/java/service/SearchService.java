@@ -28,6 +28,12 @@ public interface SearchService {
      */
     public List<Album> FindAlbumName(String albumName);
 
+    /**
+     * @param musicId
+     * @return music
+     */
+    public Music_a FindMusicById(String musicId);
+
 
 
 }
