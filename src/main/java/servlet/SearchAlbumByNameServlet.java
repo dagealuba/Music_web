@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "SearchAlbumByNameServlet")
+@WebServlet("/SearchAlbumByNameServlet")
 public class SearchAlbumByNameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -44,7 +44,7 @@ public class SearchAlbumByNameServlet extends HttpServlet {
         String albumName=request.getParameter("albumName");
         String singer=request.getParameter("singer");
 
-        System.out.println("专辑名："+albumName+"\t歌手："+singer+"\n");
+        System.out.println("专辑名："+albumName+"\n歌手："+singer+"\n");
         Album album=new Album();
         album.setSinger(singer);
         album.setAlbumId(albumId);
@@ -56,7 +56,7 @@ public class SearchAlbumByNameServlet extends HttpServlet {
         System.out.println(albums.size());
         PrintWriter out=response.getWriter();
 
-        String jsonArray= JSONArray.toJSONString(album);
+        String jsonArray= JSONArray.toJSONString(albums);
         System.out.println(jsonArray);
         out.write(jsonArray);
         out.flush();

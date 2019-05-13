@@ -1,10 +1,7 @@
 package factory;
 
 import dao.SearchDao;
-import daoImpl.AlbumDaoImpl;
-import daoImpl.MusicDaoImpl;
-import daoImpl.SearchDaoImpl;
-import daoImpl.UserDaoImpl;
+import daoImpl.*;
 
 public class DaoFactory {
     public static UserDaoImpl getUserDaoImpl(){
@@ -19,7 +16,8 @@ public class DaoFactory {
         return new AlbumDaoImpl();
     }
 
-    public static SearchDao getSearchDaoImpl() {
-        return new SearchDaoImpl();
-    }
+    public static SearchDaoImpl getSearchDaoImpl(){return new SearchDaoImpl();}
+
+    public static CommentDaoImpl getCommentDaoImpl(){return new CommentDaoImpl();}
+
 }
