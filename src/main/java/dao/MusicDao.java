@@ -5,19 +5,40 @@ import entity.Music;
 import java.util.List;
 
 public interface MusicDao {
-    public List<Music> getAllMusic();
+
+    /**
+     * @param str
+     * @return List<Music>
+     */
+    public List<Music> getMusics(String str);
+
+
+    /**
+     * @param songName
+     * @return List<Music>
+     */
+    public List<Music> getMusicsBySongName(String songName);
+
+    /**
+     * @param music
+     * @return true or false
+     */
+    public boolean addMusic(Music music);
+
+
+    /**
+     * @param music
+     * @return true or false
+     */
+    public boolean updateMusic(Music music);
+
+
+    /**
+     * @param music
+     * @return true or false
+     */
+    public boolean deleteMusic(Music music);
 
     public Music getMusicById(String musicid);
 
-    public List<Music> getMusicsBySongName(String musicname);
-
-    public List<Music> getMusicBySinger(String singer);
-
-    public Music getMusicByNameAndSinger(String musicname,String singer);
-
-    public boolean addMusic(Music music);
-
-    public boolean deleteMusic(Music music);
-
-    public boolean updateMusic(Music music);
 }
