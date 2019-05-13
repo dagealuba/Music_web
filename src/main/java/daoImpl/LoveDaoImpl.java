@@ -3,6 +3,8 @@ package daoImpl;
 import dao.BaseDao;
 import dao.LoveDao;
 import entity.Love;
+import entity.Music;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,6 +66,30 @@ public class LoveDaoImpl extends BaseDao implements LoveDao {
             this.closeResource();
         }
         return love;
+    }
+
+    @Override
+    public List<Music> getMusicInLove(Love love) {
+        List<Music> musics = new ArrayList<Music>();
+        String sql = "select * from love where lovename=? and userid=?";
+        Object[] params = {love.getLoveName(),love.getUserId()};
+        MusicDaoImpl m = new MusicDaoImpl();
+
+        resultSet = this.ExecuteQuery(sql,params);
+        try {
+            while (resultSet.next()) {
+                String musicid = resultSet.getString("musicid");
+                Music music = m.getMusicById(musicid);
+
+                musics.add(music);
+            }
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }finally {
+            this.closeResource();
+        }
+         return musics;
     }
 
     @Override
