@@ -19,6 +19,7 @@ public class CreateLoveServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         String userId = request.getParameter("userId");
+        String musicId = request.getParameter("musicId");
         String loveName = request.getParameter("loveName");
         boolean flag = false;
         PrintWriter out = response.getWriter();
@@ -32,7 +33,7 @@ public class CreateLoveServlet extends HttpServlet {
             }
         }
         if (!flag) {
-            Love love = new Love(UUID.randomUUID().toString(), loveName, userId, null);
+            Love love = new Love(UUID.randomUUID().toString(), loveName, userId,musicId);
             if (ServiceFactory.getLoveService().addlove(love)) {
                 out.write("creation successful");
             } else {
@@ -40,6 +41,7 @@ public class CreateLoveServlet extends HttpServlet {
             }
         }
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     doPost(request,response);
