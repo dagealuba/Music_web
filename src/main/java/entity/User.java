@@ -10,13 +10,15 @@ public class User {
     private String userPassword;
     private String userEmail;
     private String avatarSrc;
+    private int userType;
 
-    public User(String id,String name,String password,String email,String avatar) {
+    public User(String id, String name, String password, String email, String avatar, int userType) {
         userId = id;
         userName = name;
         userPassword = password;
         userEmail = email;
         avatarSrc = avatar;
+        this.userType = userType;
     }
 
     public User() {
@@ -66,5 +68,13 @@ public class User {
 
     public void setAvatarSrc(String avatarSrc) {
         this.avatarSrc = avatarSrc;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 }

@@ -2,6 +2,8 @@ package servlet;
 
 import com.alibaba.fastjson.JSON;
 import entity.Comment;
+import entity.CommentWithAuthor;
+import entity.User;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/CommentServlet")
@@ -44,14 +48,16 @@ public class CommentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String commentId=request.getParameter("commentId");
-        Comment comments=new Comment();
-        comments.setCommentId(commentId);
+        String musicId=request.getParameter("musicId");
+        List<Comment> comments = new ArrayList<Comment>();
+        comments = ServiceFactory.getCommentServiceImpl().getCommentByMusicId(musicId);
 
+        List<CommentWithAuthor> commentWithAuthors = new ArrayList<CommentWithAuthor>();
+        for (Comment comment:comments){
+            commentWithAuthors.add(new CommentWithAuthor(comment));
+        }
+//        System.out.println(JSON.toJSONString(commentWithAuthors));
         PrintWriter out=response.getWriter();
-        if(ServiceFactory.getCommentServiceImpl().DeleteCommentByCommentId(commentId))
-            out.write("true");
-        else
-            out.write("false");
+        out.write(JSON.toJSONString(commentWithAuthors));
     }
 }

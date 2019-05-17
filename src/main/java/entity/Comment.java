@@ -9,14 +9,16 @@ public class Comment {
     private String commentToComment;
     private int likeNumber;
     private Timestamp commentTime;
+    private String userId;
 
-    public Comment(String commentId, String musicId, String comment, String commentToComment, int likeNumber, Timestamp commentTime) {
+    public Comment(String commentId, String musicId, String comment, String commentToComment, int likeNumber, Timestamp commentTime, String userId) {
         this.commentId = commentId;
         this.musicId = musicId;
         this.comment = comment;
         this.commentToComment = commentToComment;
         this.likeNumber = likeNumber;
         this.commentTime = commentTime;
+        this.userId = userId;
     }
 
     public Comment()
@@ -70,5 +72,13 @@ public class Comment {
 
     public void setCommentTime(Timestamp commentTime) {
         this.commentTime = commentTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -63,11 +63,11 @@ public class SearchBySingerServlet extends HttpServlet {
         List<Music_a> musics= new ArrayList<>();
 
         musics= ServiceFactory.getSearchServiceImpl().FindSinger(singer);
-        System.out.println(musics.size());
+//        System.out.println(musics.size());
         PrintWriter out=response.getWriter();
 
         String jsonArray= JSONArray.toJSONString(musics);
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
         out.write(jsonArray);
         out.flush();
         out.close();

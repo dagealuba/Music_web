@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommentDaoImpl extends BaseDao implements CommentDao {
@@ -32,6 +33,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
                 comment.setLikeNumber(resultSet.getInt("likenumber"));
                 comment.setMusicId(resultSet.getString("musicid"));
                 comment.setCommentToComment(resultSet.getString("commenttocomment"));
+                comment.setUserId(resultSet.getString("userid"));
                 comments.add(comment);
             }
         } catch (SQLException e) {
@@ -48,16 +50,17 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
         String sql="select * from comment where musicId=?";
         Object[] params={musicId};
         resultSet=this.ExecuteQuery(sql,params);
-        Comment comment=new Comment();
         try{
             while(resultSet.next())
             {
+                Comment comment=new Comment();
                 comment.setMusicId(musicId);
                 comment.setComment(resultSet.getString("comment"));
                 comment.setCommentId(resultSet.getString("commentid"));
                 comment.setCommentToComment(resultSet.getString("commenttocomment"));
                 comment.setLikeNumber(resultSet.getInt("likenumber"));
                 comment.setCommentTime(resultSet.getTimestamp("commenttime"));
+                comment.setUserId(resultSet.getString("userid"));
                 comments.add(comment);
             }
 
@@ -113,12 +116,12 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
 
     @Override
     public boolean InsertComment(Comment comments) {
-        String sql="insert into comment(commentid,musicid,comment) values(?,?,?)";
+        String sql="insert into comment(commentid,musicid,comment,commenttime,commenttocomment,userid) values(?,?,?,now(),?,?)";
         String commentId=comments.getCommentId();
         String musicId=comments.getMusicId();
         String comment=comments.getComment();
 
-        Object[] params={commentId,musicId,comment};
+        Object[] params={commentId,musicId,comment,comments.getCommentToComment(),comments.getUserId()};
         return this.executeUpdate(sql,params)>0;
     }
 

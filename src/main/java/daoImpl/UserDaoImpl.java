@@ -42,7 +42,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         User user = null;
         try {
             while (resultSet.next()){
-                user = new User(userId,resultSet.getString("username"),resultSet.getString("userpassword"),resultSet.getString("useremail"),resultSet.getString("avatarsrc"));
+                user = new User(userId,resultSet.getString("username"),resultSet.getString("userpassword"),resultSet.getString("useremail"),resultSet.getString("avatarsrc"), resultSet.getInt("usertype"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -78,6 +78,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             user.setUserPassword(resultSet.getString("userpassword"));
             user.setUserEmail(resultSet.getString("useremail"));
             user.setAvatarSrc(resultSet.getString("avatarsrc"));
+            user.setUserType(resultSet.getInt("usertype"));
             users.add(user);
         }
     }
@@ -110,14 +111,15 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public boolean updateUser(User user) {
-        String sql = "update user set username = ?,userpassword = ?,useremail = ?,avatarsrc=? where userid = ?";
+        String sql = "update user set username = ?,userpassword = ?,useremail = ?,avatarsrc=?,usertype=? where userid = ?";
 
         String userId=user.getUserId();
         String userName=user.getUserName();
         String userPassword=user.getUserPassword();
         String userEmail=user.getUserEmail();
         String AvatarSrc=user.getAvatarSrc();
-        Object[] params={userName,userPassword,userEmail,AvatarSrc,userId};
+        int userType = user.getUserType();
+        Object[] params={userName,userPassword,userEmail,AvatarSrc,userType,userId};
 
 
         return this.executeUpdate(sql,params)>0;

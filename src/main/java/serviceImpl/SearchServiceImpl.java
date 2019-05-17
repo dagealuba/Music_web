@@ -29,7 +29,7 @@ public class SearchServiceImpl implements SearchService {
         List<Music_a> music_as = new ArrayList<Music_a>();
 
         for (Music music: musicList){
-            System.out.println(music.getMusicName());
+//            System.out.println(music.getMusicName());
             music_as.add(new Music_a(music));
         }
 
