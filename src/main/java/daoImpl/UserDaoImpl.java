@@ -53,6 +53,24 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
+    public User getUserByEmail(String userEmail) {
+        User user = null;
+        String sql = "select * from user where useremail=?";
+        Object[] params = {userEmail};
+
+        resultSet=this.ExecuteQuery(sql,params);
+        try {
+            while (resultSet.next()){
+                user = new User(resultSet.getString("userid"),resultSet.getString("username"),resultSet.getString("userpassword"),resultSet.getString("useremail"),resultSet.getString("avatarsrc"), resultSet.getInt("usertype"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    @Override
     public List<User> getUsersByName(String userName) {
         List<User> users = new ArrayList<User>();
         String sql="select * from user where userName like ?";
@@ -85,12 +103,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public boolean addUser(User user) {
-        String sql = "insert into user values(?,?,?,?,?)";
-        return addOrUpdataUser(user, sql);
-    }
-
-    //添加修改用户的重复代码
-    private boolean addOrUpdataUser(User user, String sql) {
+        String sql = "insert into user(userid,username,userpassword,useremail,avatarsrc) values(?,?,?,?,?)";
         String userId=user.getUserId();
         String userName=user.getUserName();
         String userPassword=user.getUserPassword();

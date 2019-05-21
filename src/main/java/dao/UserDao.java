@@ -20,6 +20,11 @@ public interface UserDao {
     public User getUserById(String userId);
 
     /**
+     * @param userEmail
+     * @return
+     */
+    public User getUserByEmail(String userEmail);
+    /**
      * 根据用户名查找用户
      * @param userName
      * @return List<User>

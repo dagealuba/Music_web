@@ -46,4 +46,32 @@ public interface CommentService {
      * @return boolean
      */
     public boolean updateComment(Comment comments);
+
+    /**
+     * @param userId
+     * @param commentId
+     * @return
+     */
+    public boolean likeComment(String userId, String commentId);
+
+    /**
+     * @param userId
+     * @param commentId
+     * @return
+     */
+    public boolean disLikeComment(String userId, String commentId);
+
+    /**
+     * @param commentId
+     * @return  comment.likeNum
+     */
+    public int likeNum(String commentId);
+
+    /**
+     * @param commentId
+     * @param userId
+     * @return
+     */
+    public boolean checkLiked(String commentId, String userId);
+
 }

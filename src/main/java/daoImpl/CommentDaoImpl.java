@@ -47,7 +47,7 @@ public class CommentDaoImpl extends BaseDao implements CommentDao {
     @Override
     public List<Comment> CommentByMusicId(String musicId) {
         List<Comment> comments=new ArrayList<Comment>();
-        String sql="select * from comment where musicId=?";
+        String sql="select * from comment where musicId=? order by likenumber,commenttime desc";
         Object[] params={musicId};
         resultSet=this.ExecuteQuery(sql,params);
         try{

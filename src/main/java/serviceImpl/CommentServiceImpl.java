@@ -42,4 +42,24 @@ public class CommentServiceImpl implements CommentService {
     public boolean updateComment(Comment comments) {
         return DaoFactory.getCommentDaoImpl().updateComment(comments);
     }
+
+    @Override
+    public boolean likeComment(String userId, String commentId) {
+        return DaoFactory.getLikeCommentDaoImpl().addLikeComment(commentId,userId);
+    }
+
+    @Override
+    public boolean disLikeComment(String userId, String commentId) {
+        return DaoFactory.getLikeCommentDaoImpl().deleteLikeComment(commentId,userId);
+    }
+
+    @Override
+    public int likeNum(String commentId) {
+        return DaoFactory.getLikeCommentDaoImpl().getLikeNum(commentId);
+    }
+
+    @Override
+    public boolean checkLiked(String commentId, String userId) {
+        return DaoFactory.getLikeCommentDaoImpl().getLikeComment(commentId,userId) != null;
+    }
 }

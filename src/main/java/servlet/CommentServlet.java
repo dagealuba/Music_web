@@ -48,12 +48,14 @@ public class CommentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String musicId=request.getParameter("musicId");
         List<Comment> comments = new ArrayList<Comment>();
         comments = ServiceFactory.getCommentServiceImpl().getCommentByMusicId(musicId);
 
         List<CommentWithAuthor> commentWithAuthors = new ArrayList<CommentWithAuthor>();
         for (Comment comment:comments){
+            comment.setLikeNumber(ServiceFactory.getCommentServiceImpl().likeNum(comment.getCommentId()));
             commentWithAuthors.add(new CommentWithAuthor(comment));
         }
 //        System.out.println(JSON.toJSONString(commentWithAuthors));

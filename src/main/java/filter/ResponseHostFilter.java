@@ -10,6 +10,7 @@ public class ResponseHostFilter implements javax.servlet.Filter {
     public void doFilter(javax.servlet.ServletRequest req, javax.servlet.ServletResponse resp, javax.servlet.FilterChain chain) throws javax.servlet.ServletException, java.io.IOException {
 //        System.out.println("test");
         ((HttpServletResponse) resp).setHeader("Access-Control-Allow-Origin","*");
+//        ((HttpServletResponse) resp).setContentType("charset=UTF-8");
         chain.doFilter(req,resp);
     }
 

@@ -10,36 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/RegistServlet")
+public class RegistServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        String userName = request.getParameter("userName");
         String userEmail = request.getParameter("userEmail");
         String userPassword = request.getParameter("userPassword");
+        String userId = UUID.randomUUID().toString();
+        String avatarSrc = "http://47.107.238.107/Music/avatar/default.jpg";
+        int type = 1;
+
+        User user = new User(userId,userName,userPassword,userEmail,avatarSrc,type);
 
         PrintWriter out = response.getWriter();
-
-        User user = ServiceFactory.getUserService().findUserByEmail(userEmail);
-
-        if (user != null) {
-            if (user.getUserPassword().equals(userPassword)){
-                out.write(user.getUserId());
-            }
-            else {
-                out.write("password_wrong");
-            }
+        if (ServiceFactory.getUserService().findUserByEmail(userEmail) != null){
+            out.write("email_wrong");
         }
-        else out.write("email_wrong");
-
-        out.flush();
-        out.close();
-
+        else if (ServiceFactory.getUserService().insert(user)){
+            out.write(userId);
+        }
+        else out.write("false");
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+
     }
 }

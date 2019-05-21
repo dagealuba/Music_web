@@ -12,11 +12,15 @@ public interface UserService {
      */
     public User findUserById(String userId);
 
+    public User findUserByEmail(String userEmail);
+
     List<User> findUserById(List<String> userIds);
 
     List<User> findUserByName(String userName);
 
     List<User> findAllUsers();
+
+    boolean insert(User user);
 
     boolean insert(List<User> users);
 

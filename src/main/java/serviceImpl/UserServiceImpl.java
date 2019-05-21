@@ -13,6 +13,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByEmail(String userEmail) {
+        return DaoFactory.getUserDaoImpl().getUserByEmail(userEmail);
+    }
+
+    @Override
     public List<User> findUserById(List<String> userIds) {
         return null;
     }
@@ -25,6 +30,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsers() {
         return null;
+    }
+
+    @Override
+    public boolean insert(User user) {
+        return DaoFactory.getUserDaoImpl().addUser(user);
     }
 
     @Override

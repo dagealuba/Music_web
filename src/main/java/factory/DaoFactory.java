@@ -1,6 +1,5 @@
 package factory;
 
-import dao.SearchDao;
 import daoImpl.*;
 
 public class DaoFactory {
@@ -19,5 +18,7 @@ public class DaoFactory {
     public static SearchDaoImpl getSearchDaoImpl(){return new SearchDaoImpl();}
 
     public static CommentDaoImpl getCommentDaoImpl(){return new CommentDaoImpl();}
+
+    public static LikeCommentDaoImpl getLikeCommentDaoImpl(){return new LikeCommentDaoImpl();}
 
 }
