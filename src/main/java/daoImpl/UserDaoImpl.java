@@ -65,6 +65,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return user;

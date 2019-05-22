@@ -109,6 +109,8 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return music;

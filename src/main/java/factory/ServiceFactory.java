@@ -1,11 +1,8 @@
 package factory;
 
+import service.HistoryService;
 import service.SearchService;
-import serviceImpl.AlbumServiceImpl;
-import serviceImpl.MusicServiceImpl;
-import serviceImpl.CommentServiceImpl;
-import serviceImpl.SearchServiceImpl;
-import serviceImpl.UserServiceImpl;
+import serviceImpl.*;
 
 public class ServiceFactory {
     public static UserServiceImpl getUserService(){
@@ -23,6 +20,10 @@ public class ServiceFactory {
     public static SearchService getSearchServiceImpl() {
         return new SearchServiceImpl();
     }
+
     public static CommentServiceImpl getCommentServiceImpl(){return new CommentServiceImpl();}
 
+    public static HistoryServiceImpl getHistoryServiceImpl(){
+        return new HistoryServiceImpl();
+    }
 }

@@ -17,6 +17,7 @@ import java.util.UUID;
 public class NewCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String commentId = UUID.randomUUID().toString();
         String commentToComment = request.getParameter("commentToComment");
         String userId = request.getParameter("userId");

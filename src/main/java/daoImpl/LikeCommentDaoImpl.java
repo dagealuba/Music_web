@@ -23,6 +23,8 @@ public class LikeCommentDaoImpl extends BaseDao implements LikeCommentDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return likeNum;
@@ -60,7 +62,10 @@ public class LikeCommentDaoImpl extends BaseDao implements LikeCommentDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
+
         return likeComment;
     }
 }

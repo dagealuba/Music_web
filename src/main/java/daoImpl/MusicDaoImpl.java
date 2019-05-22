@@ -42,6 +42,8 @@ public class MusicDaoImpl extends BaseDao implements MusicDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return musics;

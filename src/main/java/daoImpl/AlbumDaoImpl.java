@@ -47,6 +47,8 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return album;
@@ -76,6 +78,8 @@ public class AlbumDaoImpl extends BaseDao implements AlbumDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            this.closeResource();
         }
 
         return albums;

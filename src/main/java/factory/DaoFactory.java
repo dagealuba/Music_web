@@ -1,5 +1,6 @@
 package factory;
 
+import dao.HistoryDao;
 import daoImpl.*;
 
 public class DaoFactory {
@@ -19,6 +20,12 @@ public class DaoFactory {
 
     public static CommentDaoImpl getCommentDaoImpl(){return new CommentDaoImpl();}
 
-    public static LikeCommentDaoImpl getLikeCommentDaoImpl(){return new LikeCommentDaoImpl();}
+    public static LikeCommentDaoImpl getLikeCommentDaoImpl(){
+        return new LikeCommentDaoImpl();
+    }
+
+    public static HistoryDaoImpl getHistoryDaoImpl(){
+        return new HistoryDaoImpl();
+    }
 
 }
