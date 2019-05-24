@@ -10,6 +10,7 @@ public interface LoveDao {
 
     public Love getLoveByLoveId(String loveId);
 
+
     public List<Music> getMusicInLove(Love love);
 
     public boolean addLove(Love love);
