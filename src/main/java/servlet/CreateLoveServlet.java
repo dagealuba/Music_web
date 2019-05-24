@@ -24,6 +24,7 @@ public class CreateLoveServlet extends HttpServlet {
         boolean flag = false;
         PrintWriter out = response.getWriter();
 
+
         List<Love> loves = ServiceFactory.getLoveService().findLovesByUserId(userId);
         for (Love l : loves) {
             if (l.getLoveName().equals(loveName)) {
