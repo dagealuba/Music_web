@@ -10,9 +10,12 @@ public class DaoFactory {
         return new UserDaoImpl();
     }
 
+
     public static AlbumDaoImpl getAlbumDaoImpl(){return new AlbumDaoImpl();}
 
+
     public static MusicDaoImpl getMusicDaoImpl(){return new MusicDaoImpl();}
+
 
     public static LoveDaoImpl  getLoveDaoImpl() {return  new LoveDaoImpl();}
 
