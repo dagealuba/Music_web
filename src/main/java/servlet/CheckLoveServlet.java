@@ -31,6 +31,7 @@ public class CheckLoveServlet extends HttpServlet {
         {
             if(l.getLoveName().equals(loveName))
             {
+
                 musics = ServiceFactory.getLoveService().findMusicsInLove(l);
             }
         }
