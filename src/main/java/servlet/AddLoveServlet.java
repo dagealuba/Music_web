@@ -40,7 +40,7 @@ public class AddLoveServlet extends HttpServlet {
             }
         }
         Love love = new Love(UUID.randomUUID().toString(),loveName,userId,musicId);
-        DaoFactory.getLoveDaoImpl().addLove(love);
+       DaoFactory.getLoveDaoImpl().addLove(love);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
