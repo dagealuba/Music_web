@@ -59,7 +59,6 @@ public class LoveDaoImpl extends BaseDao implements LoveDao {
                 love.setUserId(resultSet.getString("userid"));
                 love.setMusicId(resultSet.getString("musicid"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
