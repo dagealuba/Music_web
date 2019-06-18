@@ -4,7 +4,6 @@ import dao.BaseDao;
 import dao.SearchDao;
 import entity.Album;
 import entity.Music;
-import entity.Music_a;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,10 +76,11 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         Object[] params={"%"+albumName+"%"};
         resultSet=this.ExecuteQuery(sql,params);
 
+//        System.out.println(albumName);
         try{
             while(resultSet.next()){
                 Album album=new Album();
-                album.setAlbumName(albumName);
+                album.setAlbumName(resultSet.getString("albumname"));
                 album.setAlbumId(resultSet.getString("albumid"));
                 album.setSinger(resultSet.getString("singer"));
                 albums.add(album);
@@ -91,6 +91,7 @@ public class SearchDaoImpl extends BaseDao implements SearchDao {
         }finally {
             this.closeResource();
         }
+
         return albums;
     }
 

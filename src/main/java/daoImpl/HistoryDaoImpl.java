@@ -65,6 +65,27 @@ public class HistoryDaoImpl extends BaseDao implements HistoryDao {
     }
 
     @Override
+    public int getNumOfMusic(String musicId) {
+        String sql = "select count(*) from history where musicId=?";
+        Object[] params = {musicId};
+
+        int n = -1;
+        this.resultSet = this.ExecuteQuery(sql,params);
+
+        try {
+            while (resultSet.next()){
+                n = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.closeResource();
+        }
+
+        return n;
+    }
+
+    @Override
     public boolean insertHistory(History history) {
         String sql = "insert into history(historyid,userid,musicid) values (?,?,?)";
         Object[] params = {history.getHistoryId(),history.getUserId(),history.getMusicId()};

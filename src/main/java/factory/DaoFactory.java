@@ -2,6 +2,7 @@ package factory;
 
 import dao.HistoryDao;
 import daoImpl.*;
+import entity.PlayList;
 
 public class DaoFactory {
     public static UserDaoImpl getUserDaoImpl(){
@@ -28,4 +29,15 @@ public class DaoFactory {
         return new HistoryDaoImpl();
     }
 
+    public static LoveDaoImpl getLoveDaoImpl(){
+        return new LoveDaoImpl();
+    }
+
+    public static PlayListDaoImpl getPlayListDaoImpl(){
+        return new PlayListDaoImpl();
+    }
+
+    public static FriendDaoImpl getFriendDaoImpl(){
+        return new FriendDaoImpl();
+    }
 }

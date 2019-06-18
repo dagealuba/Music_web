@@ -1,5 +1,6 @@
-package entity;
+package util;
 
+import entity.Music;
 import factory.DaoFactory;
 
 public class Music_a {

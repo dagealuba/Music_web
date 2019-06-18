@@ -3,7 +3,7 @@ package servlet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import entity.Music;
-import entity.Music_a;
+import util.Music_a;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -51,7 +51,7 @@ public class SearchBySingerServlet extends HttpServlet {
         String musicSrc=request.getParameter("musicSrc");
         String picSrc=request.getParameter("picSrc");
 
-        System.out.println("歌名："+musicName+"\n歌手："+singer+"\n");
+//        System.out.println("歌名："+musicName+"\n歌手："+singer+"\n");
         Music music =new Music();
         music.setMusicId(musicId);
         music.setMusicName(musicName);

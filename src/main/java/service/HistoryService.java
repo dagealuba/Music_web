@@ -1,8 +1,10 @@
 package service;
 
 import entity.History;
+import util.Music_a;
 
 import java.util.List;
+import java.util.Map;
 
 public interface HistoryService {
     /**
@@ -16,6 +18,8 @@ public interface HistoryService {
      * @return
      */
     public List<History> getUserHistory(String userId);
+
+    public Map<String, Integer> getHotMusic();
 
     /**
      * @param history

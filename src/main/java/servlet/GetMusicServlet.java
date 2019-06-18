@@ -1,9 +1,8 @@
 package servlet;
 
-import com.alibaba.fastjson.JSON;
-import entity.History;
-import util.Music_a;
+import com.alibaba.fastjson.JSONArray;
 import factory.ServiceFactory;
+import util.Music_a;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/GetLatestHistoryServlet")
-public class GetLatestHistoryServlet extends HttpServlet {
+@WebServlet("/GetMusicServlet")
+public class GetMusicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -23,18 +24,18 @@ public class GetLatestHistoryServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
-        String userId = request.getParameter("userId");
-        History history = ServiceFactory.getHistoryServiceImpl().getUserLatestHistory(userId);
+        String s = request.getParameter("musicIds");
+
+        String[] musicIds = s.split(",");
+
+        List<Music_a> music_as = new ArrayList<>();
+        for (String musicId:musicIds){
+            Music_a music_a = ServiceFactory.getSearchServiceImpl().FindMusicById(musicId);
+            music_as.add(music_a);
+        }
 
         PrintWriter out = response.getWriter();
 
-        if (history == null){
-            out.write("{\"flag\":false}");
-        }
-        else {
-            Music_a music = ServiceFactory.getSearchServiceImpl().FindMusicById(history.getMusicId());
-
-            out.write(JSON.toJSONString(music));
-        }
+        out.write(JSONArray.toJSONString(music_as));
     }
 }

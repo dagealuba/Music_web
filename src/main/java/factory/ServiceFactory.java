@@ -26,4 +26,16 @@ public class ServiceFactory {
     public static HistoryServiceImpl getHistoryServiceImpl(){
         return new HistoryServiceImpl();
     }
+
+    public static LoveServiceImpl getLoveServiceImpl(){
+        return new LoveServiceImpl();
+    }
+
+    public static PlayListServiceImpl getPlayListServiceImpl() {
+        return new PlayListServiceImpl();
+    }
+
+    public static FriendServiceImpl getFriendServiceImpl() {
+        return new FriendServiceImpl();
+    }
 }

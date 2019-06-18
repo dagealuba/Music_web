@@ -2,7 +2,8 @@ package service;
 
 
 import entity.Album;
-import entity.Music_a;
+import util.Album_m;
+import util.Music_a;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public interface SearchService {
      * @return music
      */
     public Music_a FindMusicById(String musicId);
+
+    public List<Album_m> FindMusicByAlbum(String albumName);
 
 
 

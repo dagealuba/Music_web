@@ -1,8 +1,6 @@
 package servlet;
 
-import com.alibaba.fastjson.JSON;
-import entity.History;
-import util.Music_a;
+import entity.User;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -12,29 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
-@WebServlet("/GetLatestHistoryServlet")
-public class GetLatestHistoryServlet extends HttpServlet {
+@WebServlet("/CheckFriendServlet")
+public class CheckFriendServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
         String userId = request.getParameter("userId");
-        History history = ServiceFactory.getHistoryServiceImpl().getUserLatestHistory(userId);
+        String friendId = request.getParameter("friendId");
 
         PrintWriter out = response.getWriter();
 
-        if (history == null){
-            out.write("{\"flag\":false}");
-        }
-        else {
-            Music_a music = ServiceFactory.getSearchServiceImpl().FindMusicById(history.getMusicId());
+        List<User> users = ServiceFactory.getFriendServiceImpl().getFriends(userId);
 
-            out.write(JSON.toJSONString(music));
+        String flag = "false";
+        for (User user:users){
+            if (user.getUserId().equals(friendId)){
+                flag="true";
+                break;
+            }
         }
+
+        out.write(flag);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

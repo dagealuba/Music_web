@@ -19,6 +19,9 @@ public interface HistoryDao {
      */
     public History getUserLatestHistory(String userId);
 
+
+    public int getNumOfMusic(String musicId);
+
     /**
      * 添加播放历史
      * @param history

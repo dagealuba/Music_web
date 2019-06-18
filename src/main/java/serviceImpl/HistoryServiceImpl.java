@@ -1,10 +1,13 @@
 package serviceImpl;
 
 import entity.History;
+import entity.Music;
 import factory.DaoFactory;
 import service.HistoryService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HistoryServiceImpl implements HistoryService {
     @Override
@@ -15,6 +18,18 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<History> getUserHistory(String userId) {
         return DaoFactory.getHistoryDaoImpl().getHistoryByUser(userId);
+    }
+
+    @Override
+    public Map<String, Integer> getHotMusic() {
+        List<Music> musicList = DaoFactory.getMusicDaoImpl().getMusics();
+
+        Map<String, Integer> hot = new HashMap<>();
+        for (Music music:musicList){
+            hot.put(music.getMusicId(),DaoFactory.getHistoryDaoImpl().getNumOfMusic(music.getMusicId()));
+        }
+
+        return hot;
     }
 
     @Override

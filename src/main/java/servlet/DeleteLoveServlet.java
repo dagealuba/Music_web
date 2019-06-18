@@ -1,8 +1,5 @@
 package servlet;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import entity.User;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -12,21 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-@WebServlet("/FindUserServlet")
-public class FindUserServlet extends HttpServlet {
+@WebServlet("/DeleteLoveServlet")
+public class DeleteLoveServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
-        String userName = request.getParameter("userName");
-
-        List<User> users = ServiceFactory.getUserService().findUserByName(userName);
+        String userId = request.getParameter("userId");
+        String musicId = request.getParameter("musicId");
+        String loveName = request.getParameter("loveName");
 
         PrintWriter out = response.getWriter();
 
-        out.write(JSONArray.toJSONString(users));
+        String loveId = ServiceFactory.getLoveServiceImpl().getLoveId(userId,loveName,musicId);
+
+        if (loveId != null){
+            if (ServiceFactory.getLoveServiceImpl().deleteLove(userId,loveId)){
+                out.write("true");
+            }
+        }
+        else out.write("false");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,16 +37,12 @@ public class FindUserServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 
         String userId = request.getParameter("userId");
+        String loveName = request.getParameter("loveName");
 
-        User user = ServiceFactory.getUserService().findUserById(userId);
-
-        user.setUserPassword("");
         PrintWriter out = response.getWriter();
-
-        String user_json = JSON.toJSONString(user);
-
-        out.write(user_json);
-        out.flush();
-        out.close();
+        if (ServiceFactory.getLoveServiceImpl().deleteUserLove(userId,loveName)){
+            out.write("true");
+        }
+        else out.write("false");
     }
 }

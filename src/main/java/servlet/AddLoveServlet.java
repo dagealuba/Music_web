@@ -1,8 +1,7 @@
 package servlet;
 
 import com.alibaba.fastjson.JSON;
-import entity.History;
-import util.Music_a;
+import entity.Love;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -12,29 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
-@WebServlet("/GetLatestHistoryServlet")
-public class GetLatestHistoryServlet extends HttpServlet {
+@WebServlet("/AddLoveServlet")
+public class AddLoveServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
         String userId = request.getParameter("userId");
-        History history = ServiceFactory.getHistoryServiceImpl().getUserLatestHistory(userId);
+        String musicId = request.getParameter("musicId");
+        String loveName = request.getParameter("loveName");
+        String loveId = UUID.randomUUID().toString();
+
+        Love love = new Love(loveId,loveName,userId,musicId);
 
         PrintWriter out = response.getWriter();
 
-        if (history == null){
-            out.write("{\"flag\":false}");
+        if (ServiceFactory.getLoveServiceImpl().addLove(love)){
+            out.write("true");
         }
-        else {
-            Music_a music = ServiceFactory.getSearchServiceImpl().FindMusicById(history.getMusicId());
+        else out.write("false");
 
-            out.write(JSON.toJSONString(music));
-        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

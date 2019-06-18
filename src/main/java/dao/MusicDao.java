@@ -12,6 +12,9 @@ public interface MusicDao {
      */
     public List<Music> getMusics(String str);
 
+    public List<Music> getMusics();
+
+    public List<Music> getMusicsByAlbum(String albumName);
 
     /**
      * @param songName

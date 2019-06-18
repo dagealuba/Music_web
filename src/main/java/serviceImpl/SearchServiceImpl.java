@@ -2,7 +2,8 @@ package serviceImpl;
 
 import entity.Album;
 import entity.Music;
-import entity.Music_a;
+import util.Album_m;
+import util.Music_a;
 import factory.DaoFactory;
 import service.SearchService;
 
@@ -48,6 +49,27 @@ public class SearchServiceImpl implements SearchService {
             return new Music_a(music);
         }
         return null;
+    }
+
+    @Override
+    public List<Album_m> FindMusicByAlbum(String albumName) {
+        List<Album> albums = FindAlbumName(albumName);
+//        System.out.println(albums.size());
+
+        List<Album_m> album_ms = new ArrayList<>();
+        for (Album album:albums){
+            List<Music> musics = DaoFactory.getMusicDaoImpl().getMusicsByAlbum(album.getAlbumId());
+            System.out.println(musics.size());
+            List<Music_a> music_as = new ArrayList<>();
+            for (Music music:musics){
+                music_as.add(new Music_a(music));
+            }
+
+            Album_m album_m = new Album_m(album.getAlbumId(), album.getAlbumName(),album.getSinger(),music_as);
+            album_ms.add(album_m);
+        }
+
+        return album_ms;
     }
 
 

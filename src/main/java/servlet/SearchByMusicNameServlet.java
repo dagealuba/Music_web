@@ -3,7 +3,7 @@ package servlet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import entity.Music;
-import entity.Music_a;
+import util.Music_a;
 import factory.ServiceFactory;
 
 import javax.servlet.ServletException;

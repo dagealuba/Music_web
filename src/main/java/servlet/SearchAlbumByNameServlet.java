@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import entity.Album;
 import factory.ServiceFactory;
+import util.Album_m;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,26 +41,22 @@ public class SearchAlbumByNameServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
-        String albumId=request.getParameter("albumId");
-        String albumName=request.getParameter("albumName");
-        String singer=request.getParameter("singer");
+//        String albumId=request.getParameter("albumId");
+        String albumName=request.getParameter("musicName");
+//        String singer=request.getParameter("singer");
 
-        System.out.println("专辑名："+albumName+"\n歌手："+singer+"\n");
+        System.out.println("专辑名："+albumName);
         Album album=new Album();
-        album.setSinger(singer);
-        album.setAlbumId(albumId);
+//        album.setSinger(singer);
+//        album.setAlbumId(albumId);
         album.setAlbumName(albumName);
 
-        List<Album> albums=new ArrayList<Album>();
+        List<Album_m> albums= new ArrayList<>();
 
-        albums= ServiceFactory.getSearchServiceImpl().FindAlbumName(albumName);
-        System.out.println(albums.size());
+        albums= ServiceFactory.getSearchServiceImpl().FindMusicByAlbum(albumName);
+//        System.out.println(albums.size());
         PrintWriter out=response.getWriter();
 
-        String jsonArray= JSONArray.toJSONString(albums);
-        System.out.println(jsonArray);
-        out.write(jsonArray);
-        out.flush();
-        out.close();
+        out.write(JSONArray.toJSONString(albums));
     }
 }

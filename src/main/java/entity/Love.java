@@ -13,6 +13,16 @@ public class Love {
         this.musicId = musicId;
     }
 
+    public Love() {
+
+    }
+
+    public Love(String loveName, String musicId, String userId) {
+        this.loveName = loveName;
+        this.musicId = musicId;
+        this.userId = userId;
+    }
+
     public String getLoveId() {
         return loveId;
     }
